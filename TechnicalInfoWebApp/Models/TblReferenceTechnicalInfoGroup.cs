@@ -13,8 +13,8 @@ namespace TechnicalInfoWebApp.Models
         }
 
         public Guid FldReferenceTechnicalInfoGroupId { get; set; }
-        public Guid FldReferenceId { get; set; }
         public Guid FldTechnicalInfoGroupId { get; set; }
+        public short FldReferenceId { get; set; }
         public string FldReferenceTechnicalInfoGroupReferenceId { get; set; }
 
         public virtual TblReference FldReference { get; set; }

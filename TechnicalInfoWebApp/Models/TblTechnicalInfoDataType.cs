@@ -15,7 +15,7 @@ namespace TechnicalInfoWebApp.Models
 
         public Guid FldTechnicalInfoDataTypesId { get; set; }
         public string FldTechnicalInfoDataTypesTxt { get; set; }
-        public Guid FldDataDisplayTypeId { get; set; }
+        public short FldDataDisplayTypeId { get; set; }
         public int? FldTechnicalInfoDataTypesTextLength { get; set; }
         public decimal? FldTechnicalInfoDataTypesMin { get; set; }
         public decimal? FldTechnicalInfoDataTypesMax { get; set; }

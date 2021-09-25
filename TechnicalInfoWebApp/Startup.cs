@@ -28,6 +28,8 @@ namespace TechnicalInfoWebApp
                 options.UseSqlServer(Configuration.GetConnectionString("CS"));
             });
 
+            services.AddControllers();
+
             services.AddRazorPages();
         }
 
@@ -52,6 +54,7 @@ namespace TechnicalInfoWebApp
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapRazorPages();
+                endpoints.MapControllers();
             });
         }
     }

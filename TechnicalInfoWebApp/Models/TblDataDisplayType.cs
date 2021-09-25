@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 
 #nullable disable
 
@@ -13,9 +12,7 @@ namespace TechnicalInfoWebApp.Models
             TblTechnicalInfoDataTypes = new HashSet<TblTechnicalInfoDataType>();
         }
 
-        public Guid FldDataDisplayTypeId { get; set; }
-
-        [Required(ErrorMessage ="an")]
+        public short FldDataDisplayTypeId { get; set; }
         public string FldDataDisplayTypeTxt { get; set; }
 
         public virtual ICollection<TblTechnicalInfoDataType> TblTechnicalInfoDataTypes { get; set; }

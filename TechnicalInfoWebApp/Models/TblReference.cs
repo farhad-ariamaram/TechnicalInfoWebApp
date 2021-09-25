@@ -13,7 +13,7 @@ namespace TechnicalInfoWebApp.Models
             TblTechnicalInfoGroups = new HashSet<TblTechnicalInfoGroup>();
         }
 
-        public Guid FldReferenceId { get; set; }
+        public short FldReferenceId { get; set; }
         public string FldReferenceTxt { get; set; }
 
         public virtual ICollection<TblReferenceTechnicalInfoGroup> TblReferenceTechnicalInfoGroups { get; set; }

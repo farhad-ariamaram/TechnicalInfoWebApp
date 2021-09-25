@@ -1,0 +1,51 @@
+﻿@page "/TechnicalGroupRef/{refrence}/{refTechInfoGroup}"
+@model TechnicalInfoWebApp.Pages.TechnicalGroupRefModel
+@{
+}
+
+@await Component.InvokeAsync("TechnicalGroupRefComponents")
+
+@if (ViewData["status"].ToString() == "200")
+{
+    @foreach (var item in Model.tblTechnicalInfos)
+    {
+<div>
+    @if (item.FldTechnicalInfoDataTypes.FldDataDisplayType.FldDataDisplayTypeId == 5)
+    {
+        <label for="@item.FldTechnicalInfoId">@item.FldTechnicalInfoTxt</label>
+        <input type="number" name="@item.FldTechnicalInfoId" maxlength="@item.FldTechnicalInfoDecimalLength"
+               max="@item.FldTechnicalInfoMax" min="@item.FldTechnicalInfoMin" />
+    }
+    else if (item.FldTechnicalInfoDataTypes.FldDataDisplayType.FldDataDisplayTypeId == 4)
+    {
+        <label for="@item.FldTechnicalInfoId">@item.FldTechnicalInfoTxt</label>
+        <input type="number" name="@item.FldTechnicalInfoId" maxlength="@item.FldTechnicalInfoDecimalLength"
+               max="@item.FldTechnicalInfoMax" min="@item.FldTechnicalInfoMin" />
+    }
+    else if (item.FldTechnicalInfoDataTypes.FldDataDisplayType.FldDataDisplayTypeId == 3)
+    {
+        <label for="@item.FldTechnicalInfoId">@item.FldTechnicalInfoTxt</label>
+        <input type="number" name="@item.FldTechnicalInfoId" maxlength="@item.FldTechnicalInfoDecimalLength"
+               max="@item.FldTechnicalInfoMax" min="@item.FldTechnicalInfoMin" />
+    }
+    else if (item.FldTechnicalInfoDataTypes.FldDataDisplayType.FldDataDisplayTypeId == 2)
+    {
+        <label for="@item.FldTechnicalInfoId">@item.FldTechnicalInfoTxt</label>
+        <input type="number" name="@item.FldTechnicalInfoId" maxlength="@item.FldTechnicalInfoDecimalLength"
+               max="@item.FldTechnicalInfoMax" min="@item.FldTechnicalInfoMin" />
+    }
+    else if (item.FldTechnicalInfoDataTypes.FldDataDisplayType.FldDataDisplayTypeId == 1)
+    {
+        <label for="@item.FldTechnicalInfoId">@item.FldTechnicalInfoTxt</label>
+        <input type="number" name="@item.FldTechnicalInfoId" maxlength="@item.FldTechnicalInfoDecimalLength"
+               max="@item.FldTechnicalInfoMax" min="@item.FldTechnicalInfoMin" />
+    }
+</div>
+        <br />
+    }
+}
+else
+{
+    <div>خالی</div>
+}
+

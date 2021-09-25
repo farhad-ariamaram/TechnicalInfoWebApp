@@ -52,8 +52,8 @@ namespace TechnicalInfoWebApp.Models
                 entity.ToTable("Tbl_DataDisplayType");
 
                 entity.Property(e => e.FldDataDisplayTypeId)
-                    .HasColumnName("Fld_DataDisplayType_ID")
-                    .HasDefaultValueSql("(newid())");
+                    .ValueGeneratedNever()
+                    .HasColumnName("Fld_DataDisplayType_ID");
 
                 entity.Property(e => e.FldDataDisplayTypeTxt)
                     .IsRequired()
@@ -180,12 +180,12 @@ namespace TechnicalInfoWebApp.Models
                 entity.ToTable("Tbl_Reference");
 
                 entity.Property(e => e.FldReferenceId)
-                    .HasColumnName("Fld_Reference_ID")
-                    .HasDefaultValueSql("(newid())");
+                    .ValueGeneratedNever()
+                    .HasColumnName("Fld_Reference_ID");
 
                 entity.Property(e => e.FldReferenceTxt)
                     .IsRequired()
-                    .HasMaxLength(200)
+                    .HasMaxLength(100)
                     .HasColumnName("Fld_Reference_txt");
             });
 
