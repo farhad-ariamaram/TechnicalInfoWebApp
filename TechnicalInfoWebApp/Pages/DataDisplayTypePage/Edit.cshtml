@@ -1,0 +1,35 @@
+﻿@page
+@model TechnicalInfoWebApp.Pages.DataDisplayTypePage.EditModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>نوع نمایش داده</h1>
+
+<h4>ویرایش</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="TblDataDisplayType.FldDataDisplayTypeId" />
+            <div class="form-group">
+                <label asp-for="TblDataDisplayType.FldDataDisplayTypeTxt" class="control-label">نوع نمایش داده</label>
+                <input asp-for="TblDataDisplayType.FldDataDisplayTypeTxt" class="form-control" />
+                <span asp-validation-for="TblDataDisplayType.FldDataDisplayTypeTxt" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="ذخیره" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="./Index">بازگشت</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
