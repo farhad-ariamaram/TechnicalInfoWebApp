@@ -29,12 +29,14 @@ namespace TechnicalInfoWebApp.Pages
                 return Page();
             }
 
-            await _context.TblReferenceTechnicalInfoGroups.AddAsync(new Models.TblReferenceTechnicalInfoGroup
+            var rtig = new Models.TblReferenceTechnicalInfoGroup
             {
                 FldReferenceId = t.FldReferenceId,
                 FldTechnicalInfoGroupId = t.FldTechnicalInfoGroupId,
                 FldReferenceTechnicalInfoGroupReferenceId = refTechInfoGroup
-            });
+            };
+
+            await _context.TblReferenceTechnicalInfoGroups.AddAsync(rtig);
 
             await _context.SaveChangesAsync();
 
@@ -47,7 +49,43 @@ namespace TechnicalInfoWebApp.Pages
                 .ToListAsync();
 
             ViewData["status"] = "200";
+            ViewData["FldTechnicalInfoGroupId"] = t.FldTechnicalInfoGroupId;
+            ViewData["FldReferenceTechnicalInfoGroupId"] = rtig.FldReferenceTechnicalInfoGroupId;
             return Page();
+        }
+
+        public async Task<IActionResult> OnPost()
+        {
+            var t = Request.Form["FldTechnicalInfoGroupId"].ToString();
+
+            tblTechnicalInfos = await _context.TblTechnicalInfos
+            .Include(t => t.FldTechnicalInfoDataTypes)
+            .ThenInclude(t => t.TblTechnicalInfoDataTypesValues)
+            .Include(t => t.FldTechnicalInfoDataTypes)
+            .ThenInclude(t => t.FldDataDisplayType)
+            .Where(a => a.FldTechnicalInfoGroupId.ToString() == t)
+            .ToListAsync();
+
+            foreach (var item in tblTechnicalInfos)
+            {
+                await _context.TblReferenceValues.AddAsync(new Models.TblReferenceValue { 
+                    FldReferenceTechnicalInfoGroupId = toGuid(Request.Form["FldReferenceTechnicalInfoGroupId"].ToString()),
+                    FldTechnicalInfoId = item.FldTechnicalInfoId,
+                    FldReferenceValuesValue = Request.Form[item.FldTechnicalInfoId.ToString()].ToString(),
+                    FldReferenceValuesDirection = Request.Form["dir"+item.FldTechnicalInfoId.ToString()].ToString()
+                });
+            }
+
+            await _context.SaveChangesAsync();
+
+            return RedirectToPage("./Index");
+        }
+
+        private Guid toGuid(string s)
+        {
+            Guid ownerIdGuid = Guid.Empty;
+            ownerIdGuid = new Guid(s);
+            return ownerIdGuid;
         }
     }
 }
