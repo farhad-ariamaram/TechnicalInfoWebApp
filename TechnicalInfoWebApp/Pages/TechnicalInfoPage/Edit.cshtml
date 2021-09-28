@@ -14,6 +14,8 @@
         <form method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="TblTechnicalInfo.FldTechnicalInfoId" />
+            <input type="hidden" asp-for="TblTechnicalInfo.FldTechnicalInfoGroupId" />
+            <input type="hidden" asp-for="TblTechnicalInfo.FldTechnicalInfoDataTypesId" />
             <div class="form-group">
                 <label asp-for="TblTechnicalInfo.FldTechnicalInfoTxt" class="control-label">اطلاعات فنی</label>
                 <input asp-for="TblTechnicalInfo.FldTechnicalInfoTxt" class="form-control" />
@@ -21,12 +23,12 @@
             </div>
             <div class="form-group">
                 <label asp-for="TblTechnicalInfo.FldTechnicalInfoGroupId" class="control-label">گروه اطلاعات فنی</label>
-                <select asp-for="TblTechnicalInfo.FldTechnicalInfoGroupId" class="form-control" asp-items="ViewBag.FldTechnicalInfoGroupId"></select>
+                <select asp-for="TblTechnicalInfo.FldTechnicalInfoGroupId" class="form-control" asp-items="ViewBag.FldTechnicalInfoGroupId" disabled></select>
                 <span asp-validation-for="TblTechnicalInfo.FldTechnicalInfoGroupId" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="TblTechnicalInfo.FldTechnicalInfoDataTypesId" class="control-label">نوع داده اطلاعات فنی</label>
-                <select asp-for="TblTechnicalInfo.FldTechnicalInfoDataTypesId" class="form-control" asp-items="ViewBag.FldTechnicalInfoDataTypesId"></select>
+                <select asp-for="TblTechnicalInfo.FldTechnicalInfoDataTypesId" class="form-control" asp-items="ViewBag.FldTechnicalInfoDataTypesId" disabled></select>
                 <span asp-validation-for="TblTechnicalInfo.FldTechnicalInfoDataTypesId" class="text-danger"></span>
             </div>
             <div class="form-group">

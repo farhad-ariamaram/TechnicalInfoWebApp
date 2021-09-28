@@ -54,4 +54,38 @@
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+<script>
+    $("#TblTechnicalInfo_FldTechnicalInfoGroupId").on('change', function () {
+        $.ajax({
+            type: "GET",
+            url: "?handler=FillType",
+            data: "id="+this.value,
+            success: function (data) {
+                var s = '';
+                for (var i = 0; i < data.length; i++) {
+                    s += '<option value="' + data[i].id + '">' + data[i].value + '</option>';
+                }
+                $("#TblTechnicalInfo_FldTechnicalInfoDataTypesId").html(s);
+            }
+        });  
+    });
+
+    $(document).ready(function () {
+        $.ajax({
+            type: "GET",
+            url: "?handler=FillGroup",
+            data: {},
+            success: function (data) {
+                var s = '';
+                for (var i = 0; i < data.length; i++) {
+                    s += '<option value="' + data[i].id + '">' + data[i].value +  '</option>';
+                }
+                $("#TblTechnicalInfo_FldTechnicalInfoGroupId").html(s);
+            }
+        });
+    });
+
+    
+</script>
 }

@@ -37,13 +37,33 @@ namespace TechnicalInfoWebApp.Pages.TechnicalInfoPage
             {
                 return NotFound();
             }
-           ViewData["FldTechnicalInfoDataTypesId"] = new SelectList(_context.TblTechnicalInfoDataTypes, "FldTechnicalInfoDataTypesId", "FldTechnicalInfoDataTypesTxt");
-           ViewData["FldTechnicalInfoGroupId"] = new SelectList(_context.TblTechnicalInfoGroups, "FldTechnicalInfoGroupId", "FldTechnicalInfoGroupTxt");
+
+            ViewData["FldTechnicalInfoDataTypesId"] = new SelectList(_context.TblTechnicalInfoDataTypes, "FldTechnicalInfoDataTypesId", "FldTechnicalInfoDataTypesTxt");
+            ViewData["FldTechnicalInfoGroupId"] = new SelectList(_context.TblTechnicalInfoGroups, "FldTechnicalInfoGroupId", "FldTechnicalInfoGroupTxt");
+            
             return Page();
         }
 
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see https://aka.ms/RazorPagesCRUD.
+        public IActionResult OnGetFillType(Guid id)
+        {
+            ViewData["FldTechnicalInfoGroupId"] = new SelectList(_context.TblTechnicalInfoGroups, "FldTechnicalInfoGroupId", "FldTechnicalInfoGroupTxt");
+
+            return new JsonResult(_context.TblTechnicalInfoDataTypes.Where(a => !(from b in _context.TblTechnicalInfos where b.FldTechnicalInfoGroupId == id select b.FldTechnicalInfoDataTypesId).Contains(a.FldTechnicalInfoDataTypesId)).Select(x => new
+            {
+                id = x.FldTechnicalInfoDataTypesId,
+                value = x.FldTechnicalInfoDataTypesTxt
+            }).ToList());
+        }
+
+        public IActionResult OnGetFillGroup()
+        {
+            return new JsonResult(_context.TblTechnicalInfoGroups.Include(a => a.FldReference).Select(x => new
+            {
+                id = x.FldTechnicalInfoGroupId,
+                value = x.FldTechnicalInfoGroupTxt + " - رفرنس :" + x.FldReference.FldReferenceTxt
+            }).ToList());
+        }
+
         public async Task<IActionResult> OnPostAsync()
         {
             if (!ModelState.IsValid)
